@@ -11,7 +11,7 @@ on trusted local machines!
 ## Usage
 
 A simple usage example:
-```        
+```dart   
     import 'package:ed25519_dart/ed25519_dart.dart';
     
     void main() {
