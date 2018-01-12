@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2
+
+- Release unused constants
+- Type fixes
+
 ## 1.0.0
 
 - Release version 1

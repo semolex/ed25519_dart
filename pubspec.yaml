@@ -1,6 +1,6 @@
 name: ed25519_dart
 description: Pure Dart implementation of Ed25519 - public-key signature system.
-version: 1.0.0
+version: 1.0.2
 homepage: https://github.com/semolex
 author: Oleksii Semeshchuk <semolex@live.com>
 

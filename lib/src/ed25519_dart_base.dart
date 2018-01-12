@@ -12,22 +12,18 @@ import 'dart:typed_data' show Uint8List;
 import 'package:pointycastle/pointycastle.dart' show Digest;
 
 // Magic constants
-const baseX =
+const int baseX =
 15112221349535400772501151409588531511454012693041857206046113283949847762202;
-
-const baseY =
+const int baseY =
 46316835694926478169428394003475163141307993866256225615783033603165251855960;
-const bits = 256;
-
-const d =
+const int bits = 256;
+const int d =
 37095705934669439343138083508754565189542113879843219016388785533085940283555;
-const I =
+const int I =
 19681161376707505956807079304988542015446066515923890162744021073123829784752;
-const mask =
-28948022309329048855892746252171976963317496166410141009864396001978282409976;
-const primeL =
+const int primeL =
 7237005577332262213973186563042994240857116359379907606001950938285454250989;
-const primeQ =
+const int primeQ =
 57896044618658097711785492504343953926634992332820282019728792003956564819949;
 
 List<int> basePoint = const [baseX % primeQ, baseY % primeQ];
@@ -101,7 +97,7 @@ List<int> edwards(List<int> P, List<int> Q) {
 Uint8List encodePoint(List<int> P) {
   var x = P[0];
   var y = P[1];
-  final encoded = integerToBytes(y + ((x & 1) << 255), 32);
+  var encoded = integerToBytes(y + ((x & 1) << 255), 32);
   return encoded;
 }
 
@@ -152,7 +148,7 @@ int modularPow(int x, int p) => x.modPow(pow(2, p).toInt(), primeQ);
 Uint8List publicKey(Uint8List sk) {
   var skHash = Hash(sk);
   var clamped = bytesToInteger(bitClamp(skHash));
-  final encoded = encodePoint(scalarMult(basePoint, clamped));
+  var encoded = encodePoint(scalarMult(basePoint, clamped));
   return encoded;
 }
 
@@ -185,7 +181,7 @@ Uint8List secretKey([int seed]) {
     randGen = new Random.secure();
   }
   else {
-     randGen = new Random(seed);
+    randGen = new Random(seed);
   }
   var randList = new List<int>.generate(1024, (_) => randGen.nextInt(bits));
   var clamped = bitClamp(Hash(bytesFromList(randList)));
