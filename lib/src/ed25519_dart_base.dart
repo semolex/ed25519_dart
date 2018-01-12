@@ -173,11 +173,20 @@ List<int> scalarMult(List<int> P, int e) {
 }
 
 /// Generates random secret key.
+/// Accepts optional argument [seed] to generate random values.
+/// When no arguments passed, then [Random.secure] is used to generate values.
 /// Secret key is [Uint8List] with length 64.
 ///
 ///     secretKey(); // [224, 185, ..., 10, 17, 137]
-Uint8List secretKey() {
-  var randGen = new Random.secure();
+///     secretKey(1024) // [225, 122, ..., 102, 232, 111]
+Uint8List secretKey([int seed]) {
+  Random randGen;
+  if (seed == null) {
+    randGen = new Random.secure();
+  }
+  else {
+     randGen = new Random(seed);
+  }
   var randList = new List<int>.generate(1024, (_) => randGen.nextInt(bits));
   var clamped = bitClamp(Hash(bytesFromList(randList)));
   return clamped;

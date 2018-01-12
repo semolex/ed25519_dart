@@ -106,6 +106,8 @@ void main() {
   test("secretKey() returns random Uint8List with length 64", () {
     expect(secretKey().length, equals(64));
     expect((secretKey() is Uint8List), equals(true));
+    expect(secretKey(1024).length, equals(64));
+    expect((secretKey(1024) is Uint8List), equals(true));
   });
   test("sign() creates expected signature from passed parameters", () {
     var testData = new Uint8List(32);
